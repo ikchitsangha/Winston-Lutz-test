@@ -19,8 +19,6 @@ def calcDisp(p1):
 	for c in cnts:
 		# compute the center of the contour
 		M = cv2.moments(c)
-		print('this is i  ',i)
-		print(M,c)
 		cX = int(M["m10"] / M["m00"])
 		cY = int(M["m01"] / M["m00"])
 		i=i+i
@@ -28,7 +26,7 @@ def calcDisp(p1):
 		cv2.drawContours(image, [c], -1, (56, 23,222), 1)
 		cv2.circle(image, (cX, cY), 2, (56, 23,222), -1)
 		#cv2.putText(image, "center", (cX - 20, cY - 20),
-		#	cv2.FONT_HERSHEY_SIMPLEX, 0.5, (56, 23,222), 2)
+		#cv2.FONT_HERSHEY_SIMPLEX, 0.5, (56, 23,222), 2)
 
 
 	(h, w) = image.shape[:2] #w:image-width and h:image-height
@@ -40,10 +38,12 @@ def calcDisp(p1):
 	disx= cX-(w/2)
 	disY= (h/2)-cY
 	print(f"U displacement= {disx} and V displacement = {disY}")
-#	cv2.imshow("display",image)
-#	cv2.waitKey(0) 
-#	cv2.destroyAllWindows()
+	cv2.imshow("display",image)
+	cv2.waitKey(0) 
+	cv2.destroyAllWindows()
 	return disx,disY
+	
+	
 #opening files
 print("enter name of four picutres in gantry positions 0,90,180,270 respectively")
 listG=[0,90,180,270]
@@ -59,8 +59,5 @@ for i in range(0,4):
 	text2.write(f"{dY},{listG[i]}\n")
 	
 print(f"corrections \n lateral = {listx[0]*.16} mm \n vertical = {listx[1]*.16} mm \n longitudal = {dY*.16} mm") 
-cv2.waitKey(0) 
-cv2.destroyAllWindows()
-	
 
 	
